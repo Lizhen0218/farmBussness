@@ -1,0 +1,26 @@
+[
+  {
+    "cropId": "tomato",
+    "name": "番茄",
+    "growTimeSeconds": 60,
+    "sellPrice": 2,
+    "exp": 1,
+    "unlockLevel": 1
+  },
+  {
+    "cropId": "corn",
+    "name": "玉米",
+    "growTimeSeconds": 90,
+    "sellPrice": 3,
+    "exp": 1,
+    "unlockLevel": 1
+  },
+  {
+    "cropId": "lettuce",
+    "name": "生菜",
+    "growTimeSeconds": 45,
+    "sellPrice": 2,
+    "exp": 1,
+    "unlockLevel": 1
+  }
+]

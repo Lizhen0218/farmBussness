@@ -1,0 +1,55 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: farm-server
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${FARM_MYSQL_HOST:127.0.0.1}:${FARM_MYSQL_PORT:3306}/${FARM_MYSQL_DATABASE:farm_game}?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: ${FARM_MYSQL_USERNAME:farm_game}
+    password: ${FARM_MYSQL_PASSWORD:}
+  data:
+    redis:
+      host: ${FARM_REDIS_HOST:127.0.0.1}
+      port: ${FARM_REDIS_PORT:6379}
+      password: ${FARM_REDIS_PASSWORD:}
+      database: ${FARM_REDIS_DATABASE:0}
+      timeout: 3s
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    validate-on-migrate: true
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: assign_id
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+logging:
+  level:
+    com.farmgame.server: INFO
