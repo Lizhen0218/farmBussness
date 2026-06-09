@@ -9,3 +9,5 @@ logs/runtime/
 .env
 .env.*
 !.env.example
+
+config/application-local.yml

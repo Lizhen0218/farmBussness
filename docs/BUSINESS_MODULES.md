@@ -8,10 +8,10 @@
 | --- | --- | --- | --- |
 | `user` | 玩家登录、玩家身份、玩家档案 | 已实现第一版 | `player`、`player_land` |
 | `farm` | 农场土地、播种、成熟、收获 | 已实现第一版 | `player_land`、`player_inventory`、`crops.json` |
-| `inventory` | 仓库物品、材料数量、直接出售入口 | 已实现列表和入仓，出售待完善 | `player_inventory` |
+| `inventory` | 仓库物品、材料数量、直接出售入口 | 已实现列表、入仓和直接出售第一版 | `player_inventory`、`player`、`economy_log` |
 | `gameconfig` | 游戏配置加载和配置下发 | 已实现作物配置第一版 | `game-config/crops.json`、`game_config_version` |
 | `stall` | 摆摊开局、订单制作、结算 | 当前为接口占位 | `stall_session`、`player_inventory`、`economy_log` |
-| `economy` | 金币余额、金币流水、经济校验 | 目录预留，待实现 | `player`、`economy_log` |
+| `economy` | 金币余额、金币流水、经济校验 | 已实现直接出售流水第一版 | `player`、`economy_log` |
 | `leaderboard` | 金币收入榜、每日榜、好友榜 | 当前为接口占位 | Redis Sorted Set、`player.total_income`、`player.daily_income` |
 | `ad` | 广告激励奖励、防重复领取 | 当前为接口占位 | `ad_reward_record`、`economy_log` |
 | `health` | 服务健康检查 | 已实现 | 无业务表 |
@@ -125,11 +125,11 @@ Controller 方法：
 | 方法 | 路径 | 业务场景 | 前置条件 | 结果影响 |
 | --- | --- | --- | --- | --- |
 | `InventoryController.list` | `GET /api/inventory/list` | 仓库界面打开、收获后刷新、摆摊前检查材料时调用。 | 请求头包含 `X-Player-Id`。 | 返回玩家当前仓库物品ID、类型和数量。 |
-| `InventoryController.sell` | `POST /api/inventory/sell` | 玩家选择将作物直接卖给系统商店时调用。 | 当前为占位；后续需要校验物品数量、配置售价和金币流水。 | 后续实现后会扣减仓库数量，增加金币并写入 `economy_log`。 |
+| `InventoryController.sell` | `POST /api/inventory/sell` | 玩家选择将作物直接卖给系统商店时调用。 | 请求头包含 `X-Player-Id`；请求体传 `itemId` 和 `count`；物品必须存在且数量足够。 | 扣减仓库数量，按作物配置售价增加金币，更新玩家累计收入并写入 `economy_log`。 |
 
 测试建议：
 
-当前先通过农场收获制造仓库数据，再调用 `GET /api/inventory/list` 查看数量。
+当前先通过农场收获制造仓库数据，再调用 `GET /api/inventory/list` 查看数量，随后调用 `POST /api/inventory/sell` 验证库存扣减和金币增加。
 
 ## gameconfig 模块
 

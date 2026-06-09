@@ -4,7 +4,7 @@
 
 ## 当前状态
 
-后端已完成 Java 项目初始化、数据库初始化脚本、Swagger、玩家登录初始化、农场土地、作物配置、播种、收获入仓、仓库列表第一版。
+后端已完成 Java 项目初始化、数据库初始化脚本、Swagger、玩家登录初始化、农场土地、作物配置、播种、收获入仓、仓库列表、仓库直接售出和金币流水第一版。
 
 当前推荐测试入口：
 
@@ -53,9 +53,9 @@ farm-server
 | common/web | `common/web` | 全局异常处理 | 已完成第一版 | 参数错误是否返回统一错误 |
 | user | `modules/user` | 登录、玩家基础信息、档案 | 已完成第一版 | 登录是否创建玩家，重复登录是否复用 |
 | farm | `modules/farm` | 土地、播种、成熟、收获 | 已完成第一版 | 空地播种、未成熟拦截、成熟收获 |
-| inventory | `modules/inventory` | 仓库物品 | 已完成列表和入仓 | 收获后仓库数量是否增加 |
+| inventory | `modules/inventory` | 仓库物品 | 已完成列表、入仓和直接售出 | 收获后仓库数量是否增加，售出后金币是否增加 |
 | gameconfig | `modules/gameconfig` | 作物等配置加载和下发 | 已完成作物配置 | `/api/config/crops` 是否返回三种作物 |
-| economy | `modules/economy` | 金币和经济流水 | 待实现 | 直接出售、摆摊结算、升级消耗 |
+| economy | `modules/economy` | 金币和经济流水 | 已完成直接出售流水第一版 | 直接出售、摆摊结算、升级消耗 |
 | stall | `modules/stall` | 摆摊局、订单、结算 | 接口占位 | 开局、结算、材料消耗 |
 | leaderboard | `modules/leaderboard` | Redis 排行榜 | 接口占位 | 总榜、日榜 |
 | ad | `modules/ad` | 广告奖励、防重复领取 | 接口占位 | 幂等领取、次数限制 |
@@ -84,8 +84,8 @@ farm-server
 | 播种与成熟计算 | 已实现第一版 | P0 | `POST /api/farm/plant` |
 | 收获入仓库 | 已实现第一版 | P0 | `POST /api/farm/harvest` |
 | 仓库列表 | 已实现第一版 | P0 | `GET /api/inventory/list` |
-| 仓库直接出售 | 待实现 | P0 | `POST /api/inventory/sell` |
-| 金币流水 | 待实现 | P0 | `economy_log` |
+| 仓库直接出售 | 已实现第一版 | P0 | `POST /api/inventory/sell` |
+| 金币流水 | 已实现直接出售流水第一版 | P0 | `economy_log` |
 | 摆摊开局 | 待实现 | P0 | `POST /api/stall/start` |
 | 订单生成与结算校验 | 待实现 | P0 | `POST /api/stall/finish` |
 | 摊位升级 | 待实现 | P1 | 待定 |
@@ -104,6 +104,7 @@ farm-server
 6. `POST /api/farm/plant`：选空地播种。
 7. 等待成熟后 `POST /api/farm/harvest`。
 8. `GET /api/inventory/list`：确认作物进入仓库。
+9. `POST /api/inventory/sell`：售出仓库作物，确认金币余额增加。
 
 ## 第三阶段：Cocos 接入准备
 

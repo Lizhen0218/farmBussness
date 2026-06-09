@@ -10,14 +10,14 @@ spring:
     active: dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${FARM_MYSQL_HOST:127.0.0.1}:${FARM_MYSQL_PORT:3306}/${FARM_MYSQL_DATABASE:farm_game}?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
-    username: ${FARM_MYSQL_USERNAME:farm_game}
-    password: ${FARM_MYSQL_PASSWORD:}
+    url: jdbc:mysql://${FARM_MYSQL_HOST:8.152.216.162}:${FARM_MYSQL_PORT:3306}/${FARM_MYSQL_DATABASE:farm_game}?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: ${FARM_MYSQL_USERNAME:root}
+    password: ${FARM_MYSQL_PASSWORD:Framer@2026+}
   data:
     redis:
-      host: ${FARM_REDIS_HOST:127.0.0.1}
+      host: ${FARM_REDIS_HOST:8.152.216.162}
       port: ${FARM_REDIS_PORT:6379}
-      password: ${FARM_REDIS_PASSWORD:}
+      password: ${FARM_REDIS_PASSWORD:Framer@2026+}
       database: ${FARM_REDIS_DATABASE:0}
       timeout: 3s
   flyway:

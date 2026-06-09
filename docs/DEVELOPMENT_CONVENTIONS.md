@@ -7,6 +7,9 @@
 3. 游戏数值、作物、菜谱、升级、事件和广告奖励必须配置化。
 4. 后端不完全信任客户端结算，金币、材料、广告奖励、排行榜分数和随机事件奖励必须后端校验。
 5. 每完成一个任务，在 `logs/CHANGELOG.md` 追加日期、版本、改动范围和回退提示。
+6. 修改后端前先回看 `docs/BACKEND_ALIGNMENT.md`，避免偏离后端作为权威结算层的定位。
+7. 修改 Cocos 前先回看 `D:\Farm\code\cocos-client\docs\CLIENT_STYLE_GUIDE.md` 和 `CLIENT_PROGRESS.md`，避免偏离 2.5D 农场与柜台式摆摊方向。
+8. 跨端或大功能规划前先回看 `D:\Farm\docs\PROJECT_BRIEF.md`。
 
 ## 包结构
 
@@ -85,10 +88,19 @@ com.farmgame.server
 - 回退建议：
 ```
 
+## 本地私有配置
+
+- 本地数据库和 Redis 真实连接信息写入 `config/application-local.yml`。
+- `config/application-local.yml` 已加入 `.gitignore`，禁止提交真实密码、公网地址和私有连接配置。
+- 首次本地启动前可执行 `scripts/create-local-config.ps1` 生成该文件。
+- `application-dev.yml` 会通过 `spring.config.import` 自动读取本地私有配置，IDEA 直接启动时也会生效。
+
 ## 文档索引维护
 
 - `docs/DOCUMENT_INDEX.md` 是文档、SQL、脚本和配置文件的总入口。
 - 新增、删除、重命名或修改 `docs`、`scripts`、`src/main/resources/db/migration`、`src/main/resources/game-config` 下的文件时，必须同步更新 `docs/DOCUMENT_INDEX.md`。
+- 修改 Cocos 客户端页面、场景、资源、交互或联调流程时，必须同步检查 `D:\Farm\code\cocos-client\docs\CLIENT_STYLE_GUIDE.md` 和 `CLIENT_PROGRESS.md`。
+- 修改项目总体玩法闭环、目标优先级或端职责边界时，必须同步更新 `D:\Farm\docs\PROJECT_BRIEF.md`。
 - 新增或修改表结构时，必须同步更新：
   - `docs/DATABASE_SCHEMA.md`
   - `docs/DATABASE.md`

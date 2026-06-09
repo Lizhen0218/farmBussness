@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:mysql://8.152.216.162:3306/farm_game?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: Framer@2026+
+  data:
+    redis:
+      host: 8.152.216.162
+      port: 6379
+      password: Framer@2026+
+      database: 0

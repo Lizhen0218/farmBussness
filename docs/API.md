@@ -112,3 +112,18 @@ X-Player-Id: {playerId}
 GET /api/inventory/list
 X-Player-Id: {playerId}
 ```
+
+9. 售出仓库作物：
+
+```http
+POST /api/inventory/sell
+Content-Type: application/json
+X-Player-Id: {playerId}
+
+{
+  "itemId": "tomato",
+  "count": 1
+}
+```
+
+响应中的 `coinsAdded` 是本次获得金币，`coinsBalance` 是售出后的金币余额。售出会扣减 `player_inventory`，增加 `player.coins`、`player.total_income`、`player.daily_income`，并写入 `economy_log`。
